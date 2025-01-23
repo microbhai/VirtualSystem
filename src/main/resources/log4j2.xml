@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration status="error">
+	<Properties>
+		<Property name="log-path">logs</Property>
+	</Properties>
+
+	<Appenders>
+		<RollingFile name="file-dmsv-log" fileName="${log-path}/DMSV_Log.log"
+			filePattern="${log-path}/DMSV_Log-%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout charset="UTF-8">
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} -
+					%msg%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="file-sv-log" fileName="${log-path}/SVServer_Log.log"
+			filePattern="${log-path}/SVServer_Log-%d{yyyy-MM-dd}_%i.log">
+			<PatternLayout charset="UTF-8">
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} -
+					%msg%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="sv" level="error" additivity="false">
+			<appender-ref ref="file-sv-log" />
+		</Logger>
+		<Root level="error" additivity="false">
+			<!-- <appender-ref ref="console"/> -->> <appender-ref
+				ref="file-dmsv-log" />
+		</Root>
+	</Loggers>
+</Configuration>
